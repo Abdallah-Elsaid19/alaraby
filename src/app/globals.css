@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where(.dark, .dark *));
+.primary {
+  @apply text-[#004E59] dark:text-[#004E59];
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.secondary {
+  @apply text-[#1AAEBA] dark:text-[#1AAEBA];
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.bg-primary {
+  @apply bg-[#004E59] dark:bg-[#004E59];
+}
+
+.bg-secondary {
+  @apply bg-[#1AAEBA] dark:bg-[#1AAEBA];
+}
+.row {
+  margin: 0px 5rem  !important;
+}
+@media (max-width: 768px) {
+  .row {
+    margin: 0px 0rem !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* السهم الأيمن */
+.slick-next {
+  right: -20px; /* المسافة من يمين السلايدر */
+  z-index: 10; /* عشان يبقى فوق العناصر */
 }
+
+/* السهم الأيسر */
+.slick-prev {
+  left: -30px; /* المسافة من يسار السلايدر */
+  z-index: 10;
+}
+
+/* تغيير اللون والحجم */
+.slick-prev:before,
+.slick-next:before {
+  color: #004E59 !important;
+  font-size: 35px !important;
+}
+
+/* التحكم في الشاشة الصغيرة */
+@media (max-width: 768px) {
+  .slick-prev, .slick-next {
+    display: block; /* لو كانوا مخفيين */
+    top: 40%; /* تحريك السهم رأسيًا */
+  }
+
+  .slick-prev {
+    left: 5px;
+  }
+
+  .slick-next {
+    right: 20px;
+  }
+}
+
