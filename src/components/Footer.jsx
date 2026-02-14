@@ -16,7 +16,7 @@ export default function Footer() {
       className=' bg-cover bg-[#004E59] bg-blend-color-burn dark:bg-black dark:bg-blend-normal '
       style={{backgroundImage:"url('/footer.png')"}}
     >
-    <div className='container mx-auto py-15  px-5 lg:px-0'>
+    <div className='row py-15  px-5 lg:px-0'>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-15 md-gap-7 lg-gap-5 '>
 
         <div >
