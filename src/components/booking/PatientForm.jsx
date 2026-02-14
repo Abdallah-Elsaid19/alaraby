@@ -24,7 +24,7 @@ const PatientForm = forwardRef(({ onSubmit, defaultValues }, ref) => {
         Patient Information
       </h2>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-20 mb-3">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap 15 lg:gap-20 mb-3">
         <div>
           <p className="text-xs font-semibold mb-1">First Name</p>
           <input
