@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
 .primary {
   @apply text-[#004E59] dark:text-[#004E59];
 }
@@ -16,39 +17,47 @@
 .bg-secondary {
   @apply bg-[#1AAEBA] dark:bg-[#1AAEBA];
 }
+
 .row {
-  margin: 0px 5rem  !important;
+  margin: 0px 5rem !important;
 }
+
 @media (max-width: 768px) {
   .row {
     margin: 0px 0rem !important;
   }
 }
 
-/* السهم الأيمن */
+
 .slick-next {
-  right: -20px; /* المسافة من يمين السلايدر */
-  z-index: 10; /* عشان يبقى فوق العناصر */
+  right: -20px;
+  
+  z-index: 10;
+
 }
 
-/* السهم الأيسر */
+
 .slick-prev {
-  left: -30px; /* المسافة من يسار السلايدر */
+  left: -30px;
+
   z-index: 10;
 }
 
-/* تغيير اللون والحجم */
+
 .slick-prev:before,
 .slick-next:before {
   color: #004E59 !important;
   font-size: 35px !important;
 }
 
-/* التحكم في الشاشة الصغيرة */
 @media (max-width: 768px) {
-  .slick-prev, .slick-next {
-    display: block; /* لو كانوا مخفيين */
-    top: 40%; /* تحريك السهم رأسيًا */
+
+  .slick-prev,
+  .slick-next {
+    display: block;
+
+    top: 40%;
+
   }
 
   .slick-prev {
@@ -60,3 +69,16 @@
   }
 }
 
+
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+
+  scrollbar-width: none;
+
+}
