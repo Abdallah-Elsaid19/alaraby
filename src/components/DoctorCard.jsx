@@ -1,14 +1,22 @@
 import Image from 'next/image';
 import React from 'react'
 
-export default function DoctorCard({doctor}) {
+export default function DoctorCard({ doctor }) {
   if (!doctor) return null;
-  const {id , name , avatar , jobTitle} = doctor;
+  const { id, name, avatar, jobTitle } = doctor;
   return (
-    <div key={id} className='flex  flex-col items-center gap-2 text-center'>
-      <Image src={avatar || "/doctor-placeholder.png"} alt={name} width={270} height={250} loading='lazy' className='px-5 md:px-3 lg:px-0' />
-      <h3 className='font-semibold mt-5'>{name}</h3>
-      <p className=' font-semibold text-sm px-5 text-gray-500'>{jobTitle}</p>
+    <div key={id} className='flex flex-col items-center gap-2 text-center p-4'>
+      <div className="relative w-full aspect-[4/5] max-w-[270px]">
+        <Image
+          src={avatar || "/doctor-placeholder.png"}
+          alt={name}
+          fill
+          className="object-cover rounded-lg"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+      </div>
+      <h3 className='font-semibold mt-4 text-lg'>{name}</h3>
+      <p className='font-medium text-sm text-gray-500 dark:text-gray-400'>{jobTitle}</p>
     </div>
   )
 }

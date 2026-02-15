@@ -20,25 +20,29 @@ export default function DoctorsSlider({ doctors }) {
     ),
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1280,
         settings: { slidesToShow: 3, slidesToScroll: 3, infinite: true, dots: true },
       },
       {
-        breakpoint: 768,
-        settings: { slidesToShow: 2, slidesToScroll: 2, infinite: true, dots: false },
+        breakpoint: 1024,
+        settings: { slidesToShow: 2, slidesToScroll: 2, infinite: true, dots: true },
       },
       {
-        breakpoint: 480,
+        breakpoint: 640,
         settings: { slidesToShow: 1, slidesToScroll: 1, infinite: true, dots: false },
       },
     ],
   };
 
   return (
-    <Slider {...settings}>
-      {doctors.map((doctor) => (
-        <DoctorCard key={doctor.id} doctor={doctor} />
-      ))}
-    </Slider>
+    <div className="pb-12 px-4">
+      <Slider {...settings}>
+        {doctors.map((doctor) => (
+          <div key={doctor.id} className="px-2">
+            <DoctorCard doctor={doctor} />
+          </div>
+        ))}
+      </Slider>
+    </div>
   );
 }
