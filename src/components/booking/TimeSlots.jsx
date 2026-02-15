@@ -16,7 +16,7 @@ function normalizeDayName(dayAbbr) {
     "fri": "Friday",
     "sat": "Saturday",
   };
-  
+
   const normalized = dayAbbr.toLowerCase().trim();
   return dayMap[normalized] || dayAbbr;
 }
@@ -31,25 +31,25 @@ function convert12To24(time12h) {
 
   // Remove spaces and convert to uppercase
   const time = time12h.trim().toUpperCase();
-  
+
   // Check if it's AM or PM
   const isPM = time.includes("PM");
   const isAM = time.includes("AM");
-  
+
   // Extract numbers
   const timeMatch = time.match(/(\d+):?(\d+)?/);
   if (!timeMatch) return { hours: 0, minutes: 0 };
-  
+
   let hours = parseInt(timeMatch[1], 10);
   const minutes = timeMatch[2] ? parseInt(timeMatch[2], 10) : 0;
-  
+
   // Convert to 24-hour format
   if (isPM && hours !== 12) {
     hours += 12;
   } else if (isAM && hours === 12) {
     hours = 0;
   }
-  
+
   return { hours, minutes };
 }
 
@@ -81,7 +81,7 @@ export function generateTimeSlots(
   const dayClinicHours = clinicHours.find((hours) => {
     const hoursDay = hours.day ? hours.day.trim() : "";
     const hoursDayLower = hoursDay.toLowerCase();
-    
+
     return (
       hoursDayLower === selectedDayName.toLowerCase() ||
       hoursDayLower === selectedDayAbbr.toLowerCase() ||
@@ -103,7 +103,7 @@ export function generateTimeSlots(
 
   // Convert 12-hour format to 24-hour format
   const { hours: startHour, minutes: startMinute } = convert12To24(dayClinicHours.from);
-  
+
   // Debug: log conversion
   if (process.env.NODE_ENV === 'development') {
     console.log('Time conversion:', {
@@ -111,7 +111,7 @@ export function generateTimeSlots(
       converted: { hours: startHour, minutes: startMinute },
     });
   }
-  
+
   const slots = [];
   const startTime = new Date(selectedDate);
   startTime.setHours(startHour, startMinute, 0, 0);
@@ -156,26 +156,6 @@ export default function TimeSlots({
     return generateTimeSlots(clinicHours, selectedDate, slotIntervalMinutes, clinicDurationHours);
   }, [clinicHours, selectedDate, slotIntervalMinutes, clinicDurationHours]);
 
-  const categorizeSlots = (slots) => {
-    const morning = [];
-    const afternoon = [];
-    const evening = [];
-
-    slots.forEach((slot) => {
-      const [hours] = slot.split(":").map(Number);
-      if (hours < 12) {
-        morning.push(slot);
-      } else if (hours < 17) {
-        afternoon.push(slot);
-      } else {
-        evening.push(slot);
-      }
-    });
-
-    return { morning, afternoon, evening };
-  };
-
-  const { morning, afternoon, evening } = categorizeSlots(timeSlots);
 
   const isSlotBooked = (slot) => {
     return bookedSlots.some((booked) => booked === slot);
@@ -205,28 +185,13 @@ export default function TimeSlots({
           ${booked
             ? "bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed line-through"
             : selected
-            ? "bg-teal-600 text-white shadow-md"
-            : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:border-teal-500 hover:bg-teal-50 dark:hover:bg-teal-900/20"
+              ? "bg-teal-600 text-white shadow-md"
+              : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:border-teal-500 hover:bg-teal-50 dark:hover:bg-teal-900/20"
           }
         `}
       >
         {slot}
       </button>
-    );
-  };
-
-  const renderTimeSection = (title, slots) => {
-    if (slots.length === 0) return null;
-
-    return (
-      <div className="mb-6">
-        <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-          {title}
-        </h3>
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
-          {slots.map(renderSlot)}
-        </div>
-      </div>
     );
   };
 
@@ -255,9 +220,9 @@ export default function TimeSlots({
       <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
         Select Time
       </h3>
-      {renderTimeSection("Morning", morning)}
-      {renderTimeSection("Afternoon", afternoon)}
-      {renderTimeSection("Evening", evening)}
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+        {timeSlots.map(renderSlot)}
+      </div>
     </div>
   );
 }

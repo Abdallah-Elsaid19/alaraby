@@ -6,7 +6,7 @@ import DoctorCard from "./DoctorCard";
 export default function DoctorsSlider({ doctors }) {
   const settings = {
     dots: true,
-    arrows: true,
+    arrows: false,
     infinite: true,
     speed: 600,
     slidesToShow: 4,
